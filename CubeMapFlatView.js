@@ -97,7 +97,6 @@
       faceOffsets[4] = [faceSizePx, faceSizePx];
       faceOffsets[5] = [3 * faceSizePx, faceSizePx];
     }
-    initFaces();
 
     function updateFacesPositions(halfWidth, halfHeight) {
       var i, commonOffsetX, commonOffsetY;
@@ -127,6 +126,9 @@
       renderer.render(scene, camera);
       renderer.autoClear = autoClearOrig;
     };
+
+    initFaces();
+    this.setSize(window.innerWidth, window.innerHeight);
   };
 
 }());
