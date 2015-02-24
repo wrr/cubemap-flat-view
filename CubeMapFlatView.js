@@ -1,3 +1,6 @@
+/**
+ * @author Jan Wrobel http://mixedbit.org.
+ */
 /*jslint browser: true, white: true, indent: 2*/
 /*global THREE */
 /*global Float32Array*/
