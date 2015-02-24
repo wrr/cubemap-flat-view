@@ -29,14 +29,16 @@
 	</head>
 	<body>
 
-		<div id="info"><a href="http://threejs.org" target="_blank">three.js webgl</a> - materials - dynamic cube reflection<br/>Photo by <a href="http://www.flickr.com/photos/jonragnarsson/2294472375/" target="_blank">J&oacute;n Ragnarsson</a>.</div>
+		<div id="info"><a href="http://threejs.org" target="_blank">three.js webgl</a> - dynamic cube reflection with flat cube map preview<br/>Photo by <a href="http://www.flickr.com/photos/jonragnarsson/2294472375/" target="_blank">J&oacute;n Ragnarsson</a>.</div>
 
 		<script src="lib/three.min.js"></script>
+		<script src="../CubeMapFlatView.js"></script>
 
 		<script>
 
 			var camera, cubeCamera, scene, renderer;
 			var cube, sphere, torus;
+			var cubeMapFlatView;
 
 			var fov = 70,
 			isUserInteracting = false,
@@ -70,6 +72,8 @@
 				cubeCamera.renderTarget.minFilter = THREE.LinearMipMapLinearFilter;
 				scene.add( cubeCamera );
 
+				cubeMapFlatView = new THREE.CubeMapFlatView( cubeCamera.renderTarget, 128, 5, 5 );
+
 				document.body.appendChild( renderer.domElement );
 
 				//
@@ -100,6 +104,7 @@
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				camera.projectionMatrix.makePerspective( fov, window.innerWidth / window.innerHeight, 1, 1100 );
+				cubeMapFlatView.setSize( window.innerWidth, window.innerHeight );
 			}
 
 			function onDocumentMouseDown( event ) {
@@ -208,6 +213,8 @@
 				sphere.visible = true; // *cough*
 
 				renderer.render( scene, camera );
+
+				cubeMapFlatView.render( renderer );
 
 			}
 
